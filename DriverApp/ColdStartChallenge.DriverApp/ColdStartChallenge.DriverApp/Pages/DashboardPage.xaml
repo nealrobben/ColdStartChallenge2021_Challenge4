@@ -92,7 +92,7 @@
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
             </StackLayout>
-            <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
+            <!--<RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}"
                          Grid.Row="1">
                 <CollectionView x:Name="DeliveryList"
                                 Margin="0,10,0,10"
@@ -101,7 +101,7 @@
                                 SelectionChangedCommand="*** BIND TO CORRECT PROPERTY ***"
                                 SelectionMode="*** BIND TO CORRECT PROPERTY ***">
                 </CollectionView>
-            </RefreshView>
+            </RefreshView>-->
             <controls:LoadingView IsBusy="{Binding IsBusy}" />
         </Grid>
     </ContentPage.Content>
