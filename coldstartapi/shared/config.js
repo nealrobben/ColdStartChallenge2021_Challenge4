@@ -24,9 +24,9 @@ const sqlConfig = {
 const cosmosConfig = {
     cosmosdb_endpoint: process.env.COSMOSDB_ENDPOINT,
     cosmosdb_key: process.env.COSMOSDB_KEY,
-    cosmosdb_databaseId: "coldstartdb",
-    cosmosdb_ordersContainerId: "customerorders",
-    cosmosdb_ordersPartitionKey: "id",
+    cosmosdb_databaseId: "orderdatabase",
+    cosmosdb_ordersContainerId: "orders",
+    cosmosdb_ordersPartitionKey: "icecreamId",
 };
 
 module.exports = { config, sqlConfig, cosmosConfig };
