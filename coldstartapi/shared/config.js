@@ -16,7 +16,7 @@ const sqlConfig = {
     },
     server: process.env.SQL_SERVERNAME,
     options: {
-        database: "coldstartsql",
+        database: "ColdStartChallenge",
         encrypt: true
     }
 };
