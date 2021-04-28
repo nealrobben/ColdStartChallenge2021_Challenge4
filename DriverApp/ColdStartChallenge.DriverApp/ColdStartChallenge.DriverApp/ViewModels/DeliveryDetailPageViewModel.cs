@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
-using Acr.UserDialogs;
 using ColdStartChallenge.DriverApp.Models;
 using ColdStartChallenge.DriverApp.Navigation;
 using ColdStartChallenge.DriverApp.Services;
-using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace ColdStartChallenge.DriverApp.ViewModels
@@ -17,8 +14,8 @@ namespace ColdStartChallenge.DriverApp.ViewModels
 
         private Guid _orderId;
         private OrderStatus _orderStatus;
-
-        // *** ADD THE NEEDED PROPERTIES AND COMMAND FOR MVVM BINDING ***
+        private Order _order;
+        private bool _isStatusVisible;
 
         public DeliveryDetailPageViewModel(INavigation navgiation, Guid orderId, OrderStatus orderStatus)
             : base(navgiation)
@@ -27,6 +24,47 @@ namespace ColdStartChallenge.DriverApp.ViewModels
             _driverService = new DriverService();
             _orderId = orderId;
             _orderStatus = orderStatus;
+        }
+
+        public Order Order
+        {
+            get => _order;
+            set
+            {
+                if (_order != value)
+                {
+                    _order = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public bool IsStatusVisible
+        {
+            get => _isStatusVisible;
+
+            set
+            {
+                if (_isStatusVisible != value)
+                {
+                    _isStatusVisible = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public OrderStatus Status
+        {
+            get => _orderStatus;
+
+            set
+            {
+                if (_orderStatus != value)
+                {
+                    _orderStatus = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
 
         protected override async Task OnNavigatedTo(NavigationMode mode)
@@ -43,12 +81,23 @@ namespace ColdStartChallenge.DriverApp.ViewModels
 
         private async Task LoadOrder(Guid orderId, OrderStatus orderStatus)
         {
-            // *** GET THE ORDER DETAILS **
+            Order = await _orderService.GetOrder(orderId, orderStatus);
+            
+            if (Order != null)
+            {
+                IsStatusVisible = (Order.OrderStatus == OrderStatus.Ready);
+                Status = Order.OrderStatus;
+            }
         }
 
         private async Task OnSave()
         {
-            // *** SAVE THE CURRENT ORDER WITH IT'S NEW STATE
+            Order.OrderStatus = OrderStatus.Delivering;
+            Order.Driver = AppData.Instance.User;
+
+            await _orderService.UpdateOrder(Order);
+
+            IsStatusVisible = false;
         }
     }
 }
