@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using ColdStartChallenge.DriverApp.Models;
 using ColdStartChallenge.DriverApp.Navigation;
 using ColdStartChallenge.DriverApp.Services;
+using Xamarin.CommunityToolkit.ObjectModel;
 using Xamarin.Forms;
 
 namespace ColdStartChallenge.DriverApp.ViewModels
@@ -89,6 +90,8 @@ namespace ColdStartChallenge.DriverApp.ViewModels
                 Status = Order.OrderStatus;
             }
         }
+
+        public IAsyncCommand SaveCommand => new AsyncCommand(OnSave);
 
         private async Task OnSave()
         {
