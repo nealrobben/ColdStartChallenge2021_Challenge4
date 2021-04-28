@@ -152,15 +152,6 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-
-            <!--<CollectionView x:Name="DeliveryList"
-                                Margin="0,10,0,10"
-                                ItemsSource="*** BIND TO CORRECT PROPERTY ***"
-                                SelectedItem="*** BIND TO CORRECT PROPERTY ***"
-                                SelectionChangedCommand="*** BIND TO CORRECT PROPERTY ***"
-                                SelectionMode="*** BIND TO CORRECT PROPERTY ***">
-            </CollectionView>-->
-
             <controls:LoadingView IsBusy="{Binding IsBusy}" />
         </Grid>
     </ContentPage.Content>
